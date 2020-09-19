@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+  The consent.html displays the text of your IRB-approved
+  consent form.  Even if you are not required to provide
+  a consent form, it is helpful to use this form to
+  describe what people can do if an error comes up, etc...
+
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Psychology Experiment - Informed Consent Form</title>
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="../static/css/style.css" type="text/css" />
+        <link rel="icon" href="../static/favicon.ico" />
+        <script type="text/javascript">
+            function onexit() {
+              self.close(); // no harm, no foul here
+            }
+        </script>
+		<style>
+			@media print {
+				body * {
+					visibility: hidden;
+				}
+				.legal, .legal * {
+					visibility: visible;
+				}
+				.legal {
+					position: absolute;
+					left: 0;
+					top: 0;
+					overflow:visible;
+				}
+			}
+		</style>
+    </head>
+    <body>
+        <div id="container-consent">
+            <div id="consent">
+                <h1>We need your consent to proceed</h1>
+                <hr />
+                <div class="legal well">
+                    <p>
+                       <b>Participant Consent Form</b>
+                    <p>
+                        <b>Testing Models of Productivity</b>
+                    </p>
+                        You are invited to participate in an anonymous research study on language. You will be presented with a mixture of words and non-words of English. You may be asked about the naturalness of the word, or you will be asked to indicate if the stimulus presented to you is a real word or not.
+                        The purpose of this study is to test the assumptions that different theories make about human cognition. In particular, we wish to gain a better understanding of how humans process linguistic information, and the mental computations used for producing words. In this particular task, we are trying to determine how natural or good certain past tense forms seem to you.
+                    <p>
+                        <b>Restrictions</b> There are no restrictions to participation in this study.
+                    </p>
+                    <p>
+                        <b>Duration</b>: The study should take about 5 minutes. Please only participate if you are able to do the study in one sitting, without any interruptions. Please complete the study in a quiet place and do not listen to music while completing the study. It is important that you do this study in one session, without interruption, and without doing other tasks at the same time.
+                    </p>
+                    <p>
+                        <b>Compensation</b>: We wish for our participants to be compensated minimum wage. The rate for completing the survey is therefore calculated based on how long it is expected to take to complete. This study is expected to take 5 minutes, therefore the compensation will be $1.17 CAD (the appropriate proportion of a $14.00 CAD minimum wage).
+                    </p>
+                    <p>
+                        <b>Risks and benefits</b>: This experiment involves no known risks or discomfort to you, nor is it expected to be of any direct benefit to you. For tasks involving the use of headphones, participants are responsible for selecting a volume which will not be damaging to their hearing.
+                        You will receive a compensation for your participation through Amazon Mechanical Turk. Be sure to enter the correct worker ID at the beginning of the experiment so we can process your payment.
+                    </p>
+                    <p>
+                        <b>Taking part is voluntary</b>: Your participation is completely voluntary. You may choose to close the study window at any time if you wish to withdraw your participation. If a participant chooses not to complete the study, no data is stored and the participant is not compensasted.
+                    </p>
+                    <p>
+                        <b>Privacy</b>: The responses collected will be stored securely, and if the results of this survey are used in publications or presentations they will not be linked in any way to your identity or your worker ID at Mechanical Turk. Only the PI and research assistants in the lab will have access to your worker ID. If a participant withdraws from the study before it is completed, data is automatically discarded and cannot be used in analysis.
+                    </p>
+                    <p>
+                        <b>Use of this data</b>: The results of this study will be used for research on language in a university context and may be disseminated in academic publications.
+                    </p>
+                    <p>
+                        <b>Funding Sources</b>: This study is funded by NSERC and FRQSC research grants. Funding agencies and publishers often ask researchers to make their research data accessible to other researchers upon completion of their study. Making research data available to others allows qualified researchers to reproduce scientific findings and stimulates exploration of existing data sets. In line with these requirements, we will preserve the data for future reuse. To ensure confidentiality, the shared data will be stripped of any information that could potentially identify the participant (i.e. your Mturk worker ID).
+                    </p>
+                    <p>
+                        <b>If you have any questions</b>: The principal investigator of this study is Professor Timothy O’Donnell (McGill University). You may contact the principal investigator at <u style="color:DodgerBlue;">tim.odonnell@mcgill.ca</u> for questions regarding this study.
+                    </p>
+                        This study has received approval for complying with the ethical requirements by the McGill Ethics Board under REB File # 135-0819. If you have any questions or concerns regarding your rights or welfare as a participant in this research study, please contact the McGill Ethics Officer at 514-398-6831 or <u style="color:DodgerBlue;">lynda.mcneil@mcgill.ca</u>
+                        Note: You will be asked to enter your Mechanical Turk Worker ID in the survey to confirm participation once you go to the experiment. Also, you will get a survey code at the end, and you can enter that below to complete the hit.
+                        By continuing to the below link and completing in the study, you are giving your consent that the results maybe used in a future publication on this experiment. We will not reveal your identify (e.g., your worker ID) in any publications of the data.
+                        If you would like to keep a copy of this consent form, you can print this page now.
+                    </p>
+
+                    <button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+                    <span class="glyphicon glyphicon-print"></span> Print a copy of this
+                    </button>
+                </div>
+
+                <p>
+    <input type="checkbox" id="consent_checkbox" />
+    I agree to participate in this study.
+  </p>
+  <button type="button" id="start">Start Experiment</button>
+
+            </div>
+        </div>
+    </body>
+</html>
