@@ -247,7 +247,7 @@
 
         timeline.push(debrief_block);
 
-        // var audio = audio_paths;
+        var audio = audio_paths;
 
         function saveData(name, data){
           var xhr = new XMLHttpRequest();
@@ -259,7 +259,7 @@
 
         jsPsych.init({
           timeline: timeline,
-          // preload_audio: audio,
+          preload_audio: audio,
           //on_finish:
           //function(data){ saveData("filename.csv", jsPsych.data.dataAsCSV()) }
           function () {
