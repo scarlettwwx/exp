@@ -163,7 +163,7 @@
           type: "audio-text-button-response",
           choices: ['1','2','3','4','5','This is an English word!','Replay'],
           button_html: '<button class="jspsych-btn">%choice%</button>',
-          prompt: '<p>How acceptable is the word in English? Rate the word from 1 to 5<\p> <p> Press "English" if it is a real English word<\p> <p>Press "Replay" to hear it again</p>',
+          prompt: '<p>How acceptable is the word in English? Rate the word from 1 to 5<\p> <p><b>5</b> - Completely natural English word</p> <p><b>4</b> - Mostly natural English word </p> <p><b>3</b> - Equally natural and unnatural </p> <p><b>2</b> - Mostly unnatural English word </p> <p><b>1</b> - Completely unnatural English word </p>   <p> Press "English" if it is a real English word<\p> <p>Press "Replay" to hear it again</p>',
           argin_vertical: '0px',
           margin_horizontal : '8px'
         };
@@ -187,7 +187,7 @@
           repetitions: 1,
           sample: {
               type: 'without-replacement',
-              size: 20,
+              size: 5, //20
           }
         };
 
