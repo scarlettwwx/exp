@@ -3,6 +3,10 @@
 
     <head>
         <title>jspsych + psiturk example - simple go/no-go reaction time test</title>
+        <audio id="player" controls></audio>
+        <a id="download">Download</a>
+        <button id="stop">Stop</button>
+
         <script src="../static/lib/jquery-min.js" type="text/javascript"></script>
         <script src="../static/lib/underscore-min.js" type="text/javascript"></script>
         <script src="../static/lib/backbone-min.js" type="text/javascript"></script>
@@ -133,26 +137,66 @@
   // // preload_all_audio
   // var audio = ['../static/mp3s/SEVENTEEN_Dont_Wanna_Cry.mp3',"../static/mp3s/CelineDion1.mp3"]
 
-  var trial = {
-    type: 'html-keyboard-response',
-    stimulus: 'This trial is in a loop. Press R to repeat this trial, or C to continue.'
-}
+//   var trial = {
+//     type: 'html-keyboard-response',
+//     stimulus: 'This trial is in a loop. Press R to repeat this trial, or C to continue.'
+// }
+//
+// var loop_node = {
+//     timeline: [trial],
+//     loop_function: function(data){
+//         if(jsPsych.pluginAPI.convertKeyCharacterToKeyCode('r') == data.values()[0].key_press){
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     }
+// }
+//   jsPsych.init({
+//     timeline: [loop_node]
+//   });
 
-var loop_node = {
-    timeline: [trial],
-    loop_function: function(data){
-        if(jsPsych.pluginAPI.convertKeyCharacterToKeyCode('r') == data.values()[0].key_press){
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-  jsPsych.init({
-    timeline: [loop_node]
+
+
+
+  let shouldStop = false;
+  let stopped = false;
+  const downloadLink = document.getElementById('download');
+  const stopButton = document.getElementById('stop');
+
+  stopButton.addEventListener('click', function() {
+    shouldStop = true;
   });
-        // ====================================================================================================
 
-    </script>
+  const handleSuccess = function(stream) {
+    const options = {mimeType: 'audio/webm'};
+    const recordedChunks = [];
+    const mediaRecorder = new MediaRecorder(stream, options);
+
+    mediaRecorder.addEventListener('dataavailable', function(e) {
+      if (e.data.size > 0) {
+        recordedChunks.push(e.data);
+      }
+
+      if(shouldStop === true && stopped === false) {
+        mediaRecorder.stop();
+        stopped = true;
+      }
+    });
+
+    mediaRecorder.addEventListener('stop', function() {
+      downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+      downloadLink.download = 'acetest.wav';
+    });
+
+    mediaRecorder.start();
+  };
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+
+</script>
+
+      
 
 </html>

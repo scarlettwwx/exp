@@ -3,6 +3,13 @@
     <head>
         <title>English Phonotactics Experiment</title>
         <meta charset="utf-8">
+        <!-- Import jQuery from Google CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Import HeadphoneCheck.js  -->
+        <script type="text/javascript" src="../static/js/HeadphoneCheck.js"></script>
+        <!-- Import HeadphoneCheck.css -->
+        <link rel="stylesheet" type="text/css" href="../static/js/HeadphoneCheckStyle.css">
+
         <script src="../static/lib/jquery-min.js" type="text/javascript"></script>
         <script src="../static/lib/underscore-min.js" type="text/javascript"></script>
         <script src="../static/lib/backbone-min.js" type="text/javascript"></script>
@@ -29,6 +36,9 @@
             var adServerLoc = "{{ adServerLoc }}"; // the location of your ad (so you can send user back at end of experiment)
             var mode = "{{ mode }}"; // is this running live, sandbox, or in debug mode?
         </script>
+
+        <style>#jspsych-audio-button-response-btngroup {position: relative; height: 100px;}
+        #jspsych-audio-button-response-button-4 {position: absolute; top: 50%; left: 40%;}</style>
 
         <!-- utils.js and psiturk.js provide the basic psiturk functionality -->
         <script src="../static/js/utils.js" type="text/javascript"></script>
@@ -86,28 +96,65 @@
             "<p><b>1</b> - Completely unnatural English word </p> " +
           "<p> <b>Notice: </b>There is a chance that you will be presented with real English words such as &quotbrick&quot. In this case, please indicate so by pressing the button <b>“This is an English word!” </b></p>"+
           "<p> You are allowed to replay the audio stimuli. For better results, wearing headphones is a must to start the experiement and working in a quiet environment is more helpful for you to hear the audio stimuli explicitly." +
-          "<p> We will start the experiment with a sample sound test and the headphone plugin detection. Press any key to begin.</p>"
+          "<p> We will start the experiment with a sample sound test and the headphone plugin check. Press any key to begin.</p>"
         };
 
         timeline.push(instructions);
 
+        // //headphone check:
+        // $(document).ready(function() {
+        //   // Bind callback to hcHeadphoneCheckEnd event
+        //   $(document).on('hcHeadphoneCheckEnd', function(event, data) {
+        //     var results = data.data;
+        //     var config = data.config;
+        //     var didPass = data.didPass;
+        //
+        //     if (didPass) {
+        //       $('<div/>', {
+        //         html: 'Screening task passed.<br/>totalCorrect: ' + results.totalCorrect
+        //       }).appendTo($('body'));
+        //     }
+        //     else {
+        //       $('<div/>', {
+        //         html: 'Screening task failed.<br/>totalCorrect: ' + results.totalCorrect
+        //       }).appendTo($('body'));
+        //     }
+        //   });
+        //
+        //   // customize the headphone check
+        //   var headphoneCheckConfig = {
+        //                                 jsonPath: 'headphoneCheckDefaultStimuliLocal.json',
+        //                                 totalTrials: 3,
+        //                                 trialsPerPage: 2,
+        //                                 correctThreshold: 1/3,
+        //                                 useSequential: true,
+        //                                 doShuffleTrials: true,
+        //                                 sampleWithReplacement: true,
+        //                                 doCalibration: false,
+        //                                 debug: false,
+        //                              };
+        //   HeadphoneCheck.runHeadphoneCheck(headphoneCheckConfig);
+        // });
+
+
+        //
         var capcha = {
           stimulus: "../static/mp3s/cat.mp3",
           type: "audio-button-response",
-          choices: ['dog','cat','house','children'],
+          choices: ['dog','cat','house','children', 'Replay'],
           button_html: '<button class="jspsych-btn">%choice%</button>',
-          //'cat','house','children','Replay'],
-          // choices: ['dog'],
-          // button_html: '<button class="jspsych-btn">%choice%</button>  <button class="jspsych-btn">cat</button> <button class="jspsych-btn">house</button> <button class="jspsych-btn">children</button> <br /> <button class="jspsych-btn">Replay</button> ',
+          // //'cat','house','children','Replay'],
+          //choices: ['dog'],
+        //  button_html: '<button class="jspsych-btn">%choice%</button>  <button class="jspsych-btn">cat</button> <button class="jspsych-btn">house</button> <button class="jspsych-btn">children</button> <br /> <button class="jspsych-btn">Replay</button> ',
           prompt: '<p>Which word did you hear? Click on corresponding button.<\p> <p>Press "r" on your keyboard to hear it again</p>',
-          argin_vertical: '0px',
+          margin_vertical: '8px',
           margin_horizontal : '8px'
         };
 
         var loop_node = {
             timeline: [capcha],
             loop_function: function(data){
-              if(jsPsych.pluginAPI.convertKeyCharacterToKeyCode('r') == data.values()[0].key_press){
+              if("4" == data.values()[0].button_pressed){
                 return true; // to Replay
               }  else {
                 return false;
@@ -130,7 +177,7 @@
 
         var audio_paths = [];
         var audio_strings= [];
-         $.getJSON( "../static/js/1000stimlist.js", function( data ) {  // found problem, it is empty here
+         $.getJSON( "../static/js/1000stimlist.js", function( data ) { 
              $.each( data, function( key, val ) {
                audio_paths.push(key);
                audio_strings.push(val);
@@ -162,10 +209,10 @@
           stimulus: jsPsych.timelineVariable('stimulus'),
           stimulus_text: jsPsych.timelineVariable('stimulus_text_string'),
           type: "audio-text-button-response",
-          choices: ['1','2','3','4','5','This is an English word!','Replay'],
+          choices: ['1','2','3','4','Replay','5','This is an English word!'],
           button_html: '<button class="jspsych-btn">%choice%</button>',
           prompt: '<p>How acceptable is the word in English? Rate the word from 1 to 5<\p> <p> Press "English" if it is a real English word<\p> <p>Press "Replay" to hear it again</p>',
-          argin_vertical: '0px',
+          margin_vertical: '8px',
           margin_horizontal : '8px'
         };
 
@@ -173,7 +220,7 @@
         var loop_node = {
             timeline: [trials],
             loop_function: function(data){
-              if("6" == data.values()[0].button_pressed){
+              if("4" == data.values()[0].button_pressed){
                 return true;
               } else {
                 return false;
@@ -188,11 +235,11 @@
           repetitions: 1,
           sample: {
               type: 'without-replacement',
-              size: 20,
+              size: 5,
           }
         };
 
-        // timeline.push(test_procedure);
+        timeline.push(test_procedure);
 
         var postquestionnaire = {
           type: "html-keyboard-response",
@@ -223,7 +270,7 @@
         },
         {
           text: "<strong>What is your mother language?</strong>",
-          options: ["Afrikaans", "Albanian","Arabic","Armenian", "Basque","Bengali", "Bulgarian","Catalan","Cambodian","Chinese (Mandarin)","Croatian","Czech","Danish","Dutch","English","Estonian","Fiji","Finnish","French","Georgian","German","Greek","Gujarati","Hebrew","Hindi","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Javanese","Korean","Latin","Latvian","Lithuanian","Macedonian","Malay","Malayalam","Maltese","Maori","Marathi","Mongolian","Nepali","Norwegian","Persian","Polish","Portuguese","Punjabi","Quechua","Romanian","Russian","Samoan","Serbian","Slovak","Slovenian","Spanish","Swahili","Swedish ","Tamil","Tatar","Telugu","Thai","Tibetan","Tonga","Turkish","Ukrainian","Urdu","Uzbek","Vietnamese","Welsh","Xhosa"],
+          options: ["Afrikaans", "Albanian","Arabic","Armenian", "Basque","Bengali", "Bulgarian","Catalan","Cambodian", "Cantonese", "Chinese (Mandarin)","Croatian","Czech","Danish","Dutch","English","Estonian","Fiji","Finnish","French","Georgian","German","Greek","Gujarati","Hebrew","Hindi","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Javanese","Korean","Latin","Latvian","Lithuanian","Macedonian","Malay","Malayalam","Maltese","Maori","Marathi","Mongolian","Nepali","Norwegian","Persian","Polish","Portuguese","Punjabi","Quechua","Romanian","Russian","Samoan","Serbian","Slovak","Slovenian","Spanish","Swahili","Swedish ","Tamil","Tatar","Telugu","Thai","Tibetan","Tonga","Turkish","Ukrainian","Urdu","Uzbek","Vietnamese","Welsh","Xhosa"],
           allowMultipleSelections: false,
           required: true,
           placeholder: 'Select language'
@@ -231,7 +278,7 @@
         },
         {
           text: "<strong>What language do you speak most often?</strong>",
-          options: ["Afrikaans", "Albanian","Arabic","Armenian", "Basque","Bengali", "Bulgarian","Catalan","Cambodian","Chinese (Mandarin)","Croatian","Czech","Danish","Dutch","English","Estonian","Fiji","Finnish","French","Georgian","German","Greek","Gujarati","Hebrew","Hindi","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Javanese","Korean","Latin","Latvian","Lithuanian","Macedonian","Malay","Malayalam","Maltese","Maori","Marathi","Mongolian","Nepali","Norwegian","Persian","Polish","Portuguese","Punjabi","Quechua","Romanian","Russian","Samoan","Serbian","Slovak","Slovenian","Spanish","Swahili","Swedish ","Tamil","Tatar","Telugu","Thai","Tibetan","Tonga","Turkish","Ukrainian","Urdu","Uzbek","Vietnamese","Welsh","Xhosa"],
+          options: ["Afrikaans", "Albanian","Arabic","Armenian", "Basque","Bengali", "Bulgarian","Catalan","Cambodian", "Cantonese","Chinese (Mandarin)","Croatian","Czech","Danish","Dutch","English","Estonian","Fiji","Finnish","French","Georgian","German","Greek","Gujarati","Hebrew","Hindi","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Javanese","Korean","Latin","Latvian","Lithuanian","Macedonian","Malay","Malayalam","Maltese","Maori","Marathi","Mongolian","Nepali","Norwegian","Persian","Polish","Portuguese","Punjabi","Quechua","Romanian","Russian","Samoan","Serbian","Slovak","Slovenian","Spanish","Swahili","Swedish ","Tamil","Tatar","Telugu","Thai","Tibetan","Tonga","Turkish","Ukrainian","Urdu","Uzbek","Vietnamese","Welsh","Xhosa"],
           allowMultipleSelections: false,
           required: true,
           placeholder: 'Select language'
