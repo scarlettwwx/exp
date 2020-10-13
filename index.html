@@ -120,9 +120,32 @@
 
         timeline.push(procedure)
 
+        var check1 = {
+          stimulus: "static/mp3s/assets/antiphase_HC_IOS.wav",
+          type: "audio-button-response",
+          choices: ['1','2','3'], // 2 is the answer
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          prompt: 'You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
+          margin_vertical: '8px',
+          margin_horizontal : '8px'
+        };
+
+        var check2 = {
+          stimulus: "static/mp3s/assets/antiphase_HC_ISO.wav",
+          type: "audio-button-response",
+          choices: ['1','2','3'], // 3 is the answer
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          prompt: 'You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
+          margin_vertical: '8px',
+          margin_horizontal : '8px'
+        };
+
+        timeline.push(check1)
+        timeline.push(check2)
+
         var more_instructions ={
           type: "html-keyboard-response",
-          stimulus: "Focus on the prononciation of each word. You can press any key to proceed to the experiment."
+          stimulus: "The main experiment will start from now on. Focus on the prononciation of each word. You can press any key to proceed to the experiment."
         };
 
         timeline.push(more_instructions) //cannot go back.
@@ -187,7 +210,7 @@
           repetitions: 1,
           sample: {
               type: 'without-replacement',
-              size: 5, //20
+              size: 5, //set the number of trials, 20
           }
         };
 

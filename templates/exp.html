@@ -136,6 +136,19 @@
 
         timeline.push(procedure)
 
+        // do headphone checking:
+        var check1 = {
+          stimulus: "../static/mp3s/assets/antiphase_HC_IOS.wav",
+          type: "audio-button-response",
+          choices: ['1','2','3'],
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          prompt: 'You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
+          margin_vertical: '8px',
+          margin_horizontal : '8px'
+        };
+
+        timeline.push(check1)
+
         var more_instructions ={
           type: "html-keyboard-response",
           stimulus: "Focus on the prononciation of the word. You can press any key to proceed to the experiment."
