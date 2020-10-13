@@ -125,7 +125,7 @@
           type: "audio-button-response",
           choices: ['1','2','3'], // 2 is the answer
           button_html: '<button class="jspsych-btn">%choice%</button>',
-          prompt: 'You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
+          prompt: 'Headphone check 1 : You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
           margin_vertical: '8px',
           margin_horizontal : '8px'
         };
@@ -135,13 +135,24 @@
           type: "audio-button-response",
           choices: ['1','2','3'], // 3 is the answer
           button_html: '<button class="jspsych-btn">%choice%</button>',
-          prompt: 'You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
+          prompt: 'Headphone check 2 : You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
+          margin_vertical: '8px',
+          margin_horizontal : '8px'
+        };
+
+        var check3 = {
+          stimulus: "static/mp3s/assets/antiphase_HC_SIO.wav",
+          type: "audio-button-response",
+          choices: ['1','2','3'], // 3 is the answer
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          prompt: 'Headphone check 3: You will hear three sounds separated by silences. Simply judge WHICH SOUND WAS <strong>SOFTEST (quietest)</strong> -- 1, 2, or 3\? Notice: Test sounds can only be played once!',
           margin_vertical: '8px',
           margin_horizontal : '8px'
         };
 
         timeline.push(check1)
         timeline.push(check2)
+        timeline.push(check3)
 
         var more_instructions ={
           type: "html-keyboard-response",
