@@ -47,16 +47,22 @@
 
 
        <link href="../static/js/jspsych-6/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
     </head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <body>
     </body>
+
     <script>
         /* load psiturk */
         //var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
         /* text blocks */
         var timeline= [];
+        // headphone check:
+
+        // timeline.push(headphoneCheckConfig)
+
         var welcome_page = {
           type: "html-keyboard-response",
           stimulus: "Welcome to the experiment. Press any key to view the consent form."
@@ -87,54 +93,19 @@
 
         var instructions ={
           type: "html-keyboard-response",
-          stimulus: "<p>Please read the following instructions carefully before starting the experiment. <br />In this experiment, you will see a proposed spelling for a word stimuli and hear its pronunciation each time. Some words sound like possible English words even though they don't exist. For example, here are four words: <b>brick</b>, <b>bnick</b>, <b>bwick</b>, and <b>blick</b>. Certainly, <b>brick</b> is a valid English word; <b>blick</b> does not exist but it sounds like an English word very much; <b>bwick</b> possibly could be an English word but it isn't as acceptable as <b>blick</b>. And <b>bnick</b> is not very likely to be an English word. " +
-          "<p>Your task is to rate how acceptable the presented word is as a potential word of <b>English</b> on a scale from 1 to 5.</p><p> That is, based only on the pronounciation, how natural would it be an English word?</p>" +
+          stimulus: "<p>Please read the following instructions carefully before starting the experiment. <br />In this experiment, you will be presented with some strange words. You will see them on screen and hear their pronunciation each time. Some of these will seem like possible words of English although they don't exist. For example, here are some words That you might see in the experiment: <b>brick</b>, <b>bnick</b>, <b>bwick</b>, and <b>blick</b>. Certainly, <b>brick</b> is a real English word while others are not. However, <b>blick</b> sounds like it could be an English word, even though it does not exist; <b>bwick</b> possibly could be an English word but it isn't as acceptable as <b>blick</b>. On the other hand, <b>bnick</b> does not seem like it could be an English word at all. " +
+          "<p>Your task is to rate how acceptable the presented word is as a potential word of <b>English</b> on a scale from 1 to 5.</p><p> That is, based only on the pronunciation, how natural would it be an English word?</p>" +
             "<p><b>5</b> - Completely natural English word</p>" +
             "<p><b>4</b> - Mostly natural English word </p>" +
             "<p><b>3</b> - Equally natural and unnatural </p>" +
             "<p><b>2</b> - Mostly unnatural English word </p>" +
             "<p><b>1</b> - Completely unnatural English word </p> " +
           "<p> <b>Notice: </b>There is a chance that you will be presented with real English words such as &quotbrick&quot. In this case, please indicate so by pressing the button <b>“This is an English word!” </b></p>"+
-          "<p> You are allowed to replay the audio stimuli. For better results, wearing headphones is a must to start the experiement and working in a quiet environment is more helpful for you to hear the audio stimuli explicitly." +
+          "<p> You are allowed to replay the audio stimuli. Wearing headphones is required for this experiement and we recommend working in a quiet environment so that you can hear the pronunciations of the experiemnt stimuli more clearly." +
           "<p> We will start the experiment with a sample sound test and the headphone plugin check. Press any key to begin.</p>"
         };
 
         timeline.push(instructions);
-
-        // //headphone check:
-        // $(document).ready(function() {
-        //   // Bind callback to hcHeadphoneCheckEnd event
-        //   $(document).on('hcHeadphoneCheckEnd', function(event, data) {
-        //     var results = data.data;
-        //     var config = data.config;
-        //     var didPass = data.didPass;
-        //
-        //     if (didPass) {
-        //       $('<div/>', {
-        //         html: 'Screening task passed.<br/>totalCorrect: ' + results.totalCorrect
-        //       }).appendTo($('body'));
-        //     }
-        //     else {
-        //       $('<div/>', {
-        //         html: 'Screening task failed.<br/>totalCorrect: ' + results.totalCorrect
-        //       }).appendTo($('body'));
-        //     }
-        //   });
-        //
-        //   // customize the headphone check
-        //   var headphoneCheckConfig = {
-        //                                 jsonPath: 'headphoneCheckDefaultStimuliLocal.json',
-        //                                 totalTrials: 3,
-        //                                 trialsPerPage: 2,
-        //                                 correctThreshold: 1/3,
-        //                                 useSequential: true,
-        //                                 doShuffleTrials: true,
-        //                                 sampleWithReplacement: true,
-        //                                 doCalibration: false,
-        //                                 debug: false,
-        //                              };
-        //   HeadphoneCheck.runHeadphoneCheck(headphoneCheckConfig);
-        // });
 
 
         //
@@ -143,9 +114,6 @@
           type: "audio-button-response",
           choices: ['dog','cat','house','children', 'Replay'],
           button_html: '<button class="jspsych-btn">%choice%</button>',
-          // //'cat','house','children','Replay'],
-          //choices: ['dog'],
-        //  button_html: '<button class="jspsych-btn">%choice%</button>  <button class="jspsych-btn">cat</button> <button class="jspsych-btn">house</button> <button class="jspsych-btn">children</button> <br /> <button class="jspsych-btn">Replay</button> ',
           prompt: '<p>Which word did you hear? Click on corresponding button.<\p> <p>Press "r" on your keyboard to hear it again</p>',
           margin_vertical: '8px',
           margin_horizontal : '8px'
@@ -177,7 +145,7 @@
 
         var audio_paths = [];
         var audio_strings= [];
-         $.getJSON( "../static/js/1000stimlist.js", function( data ) { 
+         $.getJSON( "../static/js/1000stimlist.js", function( data ) {
              $.each( data, function( key, val ) {
                audio_paths.push(key);
                audio_strings.push(val);
@@ -304,7 +272,6 @@
           xhr.send(JSON.stringify({filename: name, filedata: data}));
         }
         /* start the experiment */
-
         jsPsych.init({
           timeline: timeline,
           preload_audio: audio,

@@ -79,23 +79,24 @@
 
         var instructions ={
           type: "html-keyboard-response",
-          stimulus: "<p> <b>Please read the following instructions carefully before starting the experiment</b>. <br />In this experiment, you will see a proposed spelling for a word stimuli and hear its pronunciation each time. Some words sound like possible English words even though they don't exist. For example, here are four words: <b>brick</b>, <b>bnick</b>, <b>bwick</b>, and <b>blick</b>. Certainly, <b>brick</b> is a valid English word; <b>blick</b> does not exist but it sounds like an English word very much; <b>bwick</b> possibly could be an English word but it isn't as acceptable as <b>blick</b>. And <b>bnick</b> is not very likely to be an English word. " +
-          "<p>Your task is to rate how acceptable the presented word is as a potential word of <b>English</b> on a scale from 1 to 5.</p><p> That is, based only on the pronounciation, how natural would it be an English word?</p>" +
+          stimulus: "<p>Please read the following instructions carefully before starting the experiment. <br />In this experiment, you will be presented with some strange words. You will see them on screen and hear their pronunciation each time. Some of these will seem like possible words of English although they don't exist. For example, here are some words That you might see in the experiment: <b>brick</b>, <b>bnick</b>, <b>bwick</b>, and <b>blick</b>. Certainly, <b>brick</b> is a real English word while others are not. However, <b>blick</b> sounds like it could be an English word, even though it does not exist; <b>bwick</b> possibly could be an English word but it isn't as acceptable as <b>blick</b>. On the other hand, <b>bnick</b> does not seem like it could be an English word at all. " +
+          "<p>Your task is to rate how acceptable the presented word is as a potential word of <b>English</b> on a scale from 1 to 5.</p><p> That is, based only on the pronunciation, how natural would it be an English word?</p>" +
             "<p><b>5</b> - Completely natural English word</p>" +
             "<p><b>4</b> - Mostly natural English word </p>" +
             "<p><b>3</b> - Equally natural and unnatural </p>" +
             "<p><b>2</b> - Mostly unnatural English word </p>" +
             "<p><b>1</b> - Completely unnatural English word </p> " +
-          "<p> <b>Notice: </b>There is a chance that you will be presented with real English words such as &quotbrick&quot. In this case, please indicate so by pressing the button <b>“This is an English word!” </b> You are allowed to replay the audio stimuli by pressing <b>r </b> on your keyboard. For better results, wearing headphones is a must to start the experiement and working in a quiet environment is more helpful for you to hear the audio stimuli explicitly." +
-          "<p> We will start the experiment with a sample sound test and your headphone plugin detection. Press any key to begin.</p>"
+          "<p> <b>Notice: </b>There is a chance that you will be presented with real English words such as &quotbrick&quot. In this case, please indicate so by pressing the button <b>“This is an English word!” </b></p>"+
+          "<p> You are allowed to replay the audio stimuli. Wearing headphones is required for this experiement and we recommend working in a quiet environment so that you can hear the pronunciations of the experiemnt stimuli more clearly." +
+          "<p> We will start the experiment with a sample sound test and the headphone plugin check. Press any key to begin.</p>"
         };
-
+        
         timeline.push(instructions);
 
         var capcha = {
           stimulus: "static/mp3s/cat.mp3",
           type: "audio-button-response",
-          choices: ['dog','cat','house','children','Replay'],
+          choices: ['dog','cat','house','children', 'Replay'],
           button_html: '<button class="jspsych-btn">%choice%</button>',
           prompt: '<p>This is a sample sound test. Which word did you hear? Click on corresponding button.<\p> <p>Press "r" on your keyboard to hear it again</p>',
           argin_vertical: '0px',
