@@ -156,20 +156,20 @@
 
         var more_instructions ={
           type: "html-keyboard-response",
-          stimulus: "The main experiment will start from now on. Focus on the prononciation of each word. You can press any key to proceed to the experiment."
+          stimulus: "The main experiment will start from now on. Focus on the pronunciation of each word. You can press any key to start the experiment."
         };
 
         timeline.push(more_instructions) //cannot go back.
 
         var audio_paths = [];
         var audio_strings= [];
-         $.getJSON( "static/js/stimulist.js", function( data ) {  // found problem, it is empty here
+         $.getJSON( "static/js/stimulist.js", function( data ) {  
              $.each( data, function( key, val ) {
                audio_paths.push(key);
                audio_strings.push(val);
              });
            });
-          for (soundFile in stimuli) { //bug is here
+          for (soundFile in stimuli) { 
             if (stimuli.hasOwnProperty(soundFile))
             {
               audio_paths.push(soundFile);
