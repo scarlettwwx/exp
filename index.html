@@ -224,11 +224,11 @@
               size: 18, //set the number of trials, 20
           }
         };
-        
+
         timeline.push(test_procedure)
 
         // catch trials:
-        var catch = {
+        var ctrial = {
           stimulus: "static/mp3s/dog.mp3",
           type: "audio-button-response",
           choices: ['1','2','3','4','Replay','5','This is an English word!'], //should click english word button!
@@ -239,7 +239,7 @@
         };
 
         var loop_node_2 = {
-            timeline: [catch],
+            timeline: [ctrial],
             loop_function: function(data){
               if("4" == data.values()[0].button_pressed){
                 return true; // to Replay
