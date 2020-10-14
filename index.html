@@ -221,11 +221,41 @@
           repetitions: 1,
           sample: {
               type: 'without-replacement',
-              size: 20, //set the number of trials, 20
+              size: 18, //set the number of trials, 20
           }
         };
+        
+        timeline.push(test_procedure)
 
-        timeline.push(test_procedure);
+        // catch trials:
+        var catch = {
+          stimulus: "static/mp3s/dog.mp3",
+          type: "audio-button-response",
+          choices: ['1','2','3','4','Replay','5','This is an English word!'], //should click english word button!
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          prompt: '<p>How acceptable is the word in English? Rate the word from 1 to 5<\p> <p><b>5</b> - Completely natural English word</p> <p><b>4</b> - Mostly natural English word </p> <p><b>3</b> - Equally natural and unnatural </p> <p><b>2</b> - Mostly unnatural English word </p> <p><b>1</b> - Completely unnatural English word </p>   <p> Press "English" if it is a real English word<\p> <p>Press "Replay" to hear it again</p>',
+          margin_vertical: '0px',
+          margin_horizontal : '8px'
+        };
+
+        var loop_node_2 = {
+            timeline: [catch],
+            loop_function: function(data){
+              if("4" == data.values()[0].button_pressed){
+                return true; // to Replay
+              }  else {
+                return false;
+              }
+            }
+          };
+
+        var catch_trails = {
+          timeline: [loop_node],
+        };
+
+        timeline.push(catch_trails)
+
+
 
         var postquestionnaire = {
           type: "html-keyboard-response",
@@ -276,7 +306,7 @@
 
         var debrief_block = {
          type: "html-keyboard-response",
-         stimulus: "<p> You are finished! Thank you for your contributions to science. You will be eligible for full payment once you answer the following questions.Press any key to exit the experiment. Thank you!</p>",
+         stimulus: "<p> You are finished! Thank you for participating in this experiment, and your time is valuable to us.<\ br> At the end, a pop up will appear with a code that you can copy and paste into Mechanical Turk to get your compensation. If you have any problems or concerns, please contact our principal investigator at tim.odonnell@mcgill.ca for questions regarding this study. Press any key to exit the experiment. Thank you!</p>",
         };
 
         timeline.push(debrief_block);
