@@ -3,6 +3,11 @@
     <head>
         <title>English Phonotactics Experiment</title>
         <meta charset="utf-8">
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+
         <script src="static/lib/jquery-min.js" type="text/javascript"></script>
         <script src="static/lib/underscore-min.js" type="text/javascript"></script>
         <script src="static/lib/backbone-min.js" type="text/javascript"></script>
@@ -48,6 +53,25 @@
         /* load psiturk */
         //var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
         /* text blocks */
+        // load firestore:
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyBqcMgoPTGt6zn9nbyAzY9cADWFa6cLEWg",
+          authDomain: "experiment-1527e.firebaseapp.com",
+          databaseURL: "https://experiment-1527e.firebaseio.com",
+          projectId: "experiment-1527e",
+          storageBucket: "experiment-1527e.appspot.com",
+          messagingSenderId: "345966023485",
+          appId: "1:345966023485:web:4605ae02c24cf4fe85ab54",
+          measurementId: "G-B2HKX1LQZF"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics(); 
+        const db = firebase.firestore()
+        //db.settings({timestampsInSnapshots: true })
+
         var timeline= [];
         var welcome_page = {
           type: "html-keyboard-response",
@@ -324,11 +348,13 @@
         jsPsych.init({
           timeline: timeline,
           preload_audio: audio,
-          on_finish: function(){ saveData("experiment_data", jsPsych.data.get().csv()); }
+          //on_finish: function(){ saveData("experiment_data", jsPsych.data.get().csv()); }
           //function(data){ saveData("filename.csv", jsPsych.data.dataAsCSV()) }
-          // function () {
-          //   jsPsych.data.displayData('json')
-          // }
+          on_finish:
+            function () {
+              //jsPsych.data.displayData('json')
+               jsPsych.data.get().localSave('csv','mydata.csv');
+            }
         });
 
         // ====================================================================================================
