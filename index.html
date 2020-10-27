@@ -324,11 +324,11 @@
         jsPsych.init({
           timeline: timeline,
           preload_audio: audio,
-          //on_finish:
+          on_finish: function(){ saveData("experiment_data", jsPsych.data.get().csv()); }
           //function(data){ saveData("filename.csv", jsPsych.data.dataAsCSV()) }
-          function () {
-            jsPsych.data.displayData('json')
-          }
+          // function () {
+          //   jsPsych.data.displayData('json')
+          // }
         });
 
         // ====================================================================================================
