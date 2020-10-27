@@ -291,6 +291,7 @@
 
         var demographics = {
         type: "dropdown",
+        superq: "Pleaser answer the following questions",
         questions: [
         {
           text: "<strong>What is your gender?</strong>",
@@ -330,19 +331,19 @@
 
         var debrief_block = {
          type: "html-keyboard-response",
-         stimulus: "<p> You are finished! Thank you for participating in this experiment, and your time is valuable to us.<\ br> At the end, a pop up will appear with a code that you can copy and paste into Mechanical Turk to get your compensation. If you have any problems or concerns, please contact our principal investigator at tim.odonnell@mcgill.ca for questions regarding this study. Press any key to exit the experiment. Thank you!</p>",
+         stimulus: "<p> You are finished! Thank you for participating in this experiment, and your time is valuable to us.<br /> At the end, a pop up will appear with a code that you can copy and paste into Mechanical Turk to get your compensation. If you have any problems or concerns, please contact our principal investigator at tim.odonnell@mcgill.ca for questions regarding this study. Press any key to exit the experiment. Thank you!</p>",
         };
 
         timeline.push(debrief_block);
 
         var audio = audio_paths;
 
-        function saveData(name, data){
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', 'save_data.php'); // 'write_data.php' is the path to the php file described above.
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.send(JSON.stringify({filename: name, filedata: data}));
-        }
+        // function saveData(name, data){
+        //   var xhr = new XMLHttpRequest();
+        //   xhr.open('POST', 'save_data.php'); // 'write_data.php' is the path to the php file described above.
+        //   xhr.setRequestHeader('Content-Type', 'application/json');
+        //   xhr.send(JSON.stringify({filename: name, filedata: data}));
+        // }
         /* start the experiment */
 
         jsPsych.init({
@@ -354,6 +355,17 @@
             function () {
               //jsPsych.data.displayData('json')
                jsPsych.data.get().localSave('csv','mydata.csv');
+               db.collection("cities").doc("LA").set({
+                    name: "Los Angeles",
+                    state: "CA",
+                    country: "USA"
+              })
+              .then(function() {
+                  console.log("Document successfully written!");
+              })
+              .catch(function(error) {
+                  console.error("Error writing document: ", error);
+});
             }
         });
 
