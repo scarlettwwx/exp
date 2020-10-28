@@ -53,7 +53,6 @@
         /* load psiturk */
         //var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
         /* text blocks */
-        // load firestore:
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         var firebaseConfig = {
@@ -103,16 +102,16 @@
 
         var instructions ={
           type: "html-keyboard-response",
-          stimulus: "<p>Please read the following instructions carefully before starting the experiment. <br />In this experiment, you will be presented with some strange words. You will see them on screen and hear their pronunciation each time. Some of these will seem like possible words of English although they don't exist. For example, here are some words That you might see in the experiment: <b>brick</b>, <b>bnick</b>, <b>bwick</b>, and <b>blick</b>. Certainly, <b>brick</b> is a real English word while others are not. However, <b>blick</b> sounds like it could be an English word, even though it does not exist; <b>bwick</b> possibly could be an English word but it isn't as acceptable as <b>blick</b>. On the other hand, <b>bnick</b> does not seem like it could be an English word at all. " +
-          "<p>Your task is to rate how acceptable the presented word is as a potential word of <b>English</b> on a scale from 1 to 5.</p><p> That is, based only on the pronunciation, how natural would it be an English word?</p>" +
+          stimulus: "<p align="left"> Please read the following instructions carefully before starting the experiment. <br />In this experiment, you will be presented with some strange words. You will see them on screen and hear their pronunciation each time. Some of these will seem like possible words of English although they don't exist. For example, here are some words That you might see in the experiment: <b>brick</b>, <b>bnick</b>, <b>bwick</b>, and <b>blick</b>. Certainly, <b>brick</b> is a real English word while others are not. However, <b>blick</b> sounds like it could be an English word, even though it does not exist; <b>bwick</b> possibly could be an English word but it isn't as acceptable as <b>blick</b>. On the other hand, <b>bnick</b> does not seem like it could be an English word at all. " +
+          "<p align="left"> Your task is to rate how acceptable the presented word is as a potential word of <b>English</b> on a scale from 1 to 5.</p><p> That is, based only on the pronunciation, how natural would it be an English word?</p>" +
             "<p><b>5</b> - Completely natural English word</p>" +
             "<p><b>4</b> - Mostly natural English word </p>" +
             "<p><b>3</b> - Equally natural and unnatural </p>" +
             "<p><b>2</b> - Mostly unnatural English word </p>" +
             "<p><b>1</b> - Completely unnatural English word </p> " +
-          "<p> <b>Notice: </b>There is a chance that you will be presented with real English words such as &quotbrick&quot. In this case, please indicate so by pressing the button <b>“This is an English word!” </b></p>"+
-          "<p> You are allowed to replay the audio stimuli. Wearing headphones is required for this experiement and we recommend working in a quiet environment so that you can hear the pronunciations of the experiemnt stimuli more clearly." +
-          "<p> We will start the experiment with a sample sound test and three headphone checks. Press any key to begin.</p>"
+          "<p align="left">  <b>Notice: </b>There is a chance that you will be presented with real English words such as &quotbrick&quot. In this case, please indicate so by pressing the button <b>“This is an English word!” </b></p>"+
+          "<p align="left">  You are allowed to replay the audio stimuli. Wearing headphones is required for this experiement and we recommend working in a quiet environment so that you can hear the pronunciations of the experiemnt stimuli more clearly." +
+          "<p align="left">  We will start the experiment with a sample sound test and three headphone checks. Press any key to begin.</p>"
         };
         
         timeline.push(instructions);
@@ -354,13 +353,14 @@
           on_finish:
             function () {
               //jsPsych.data.displayData('json')
-               jsPsych.data.get().localSave('csv','mydata.csv');
-               db.collection("cities").doc("LA").set({
-                    name: "Los Angeles",
-                    state: "CA",
-                    country: "USA"
+               jsPsych.data.get().localSave('csv','newdata.csv');
+               // save to firebase:
+               db.collection("participants").add({
+                    response: jsPsych.data.get().json()
               })
               .then(function() {
+                  console.log(jsPsych.data.get().json())
+                  console.log("Document written with ID: ", docRef.id);
                   console.log("Document successfully written!");
               })
               .catch(function(error) {
