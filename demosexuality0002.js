@@ -1,4 +1,4 @@
-define(['pipAPI', 'https://scarlettwwx.github.io/demosexuality0002.js'], function(APIConstructor, iatExtension){
+define(['pipAPI', 'https://baranan.github.io/minno-tasks/quiat9.js'], function(APIConstructor, iatExtension){
 	var API = new APIConstructor();
 
 	var posWords = API.shuffle([
