@@ -98,7 +98,7 @@ define(['pipAPI', 'https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/BIAT/qual
                    }
                ],
                base_url : {//Where are your images at?
-               image : 'https://baranan.github.io/minno-tasks/images/'
+               image : './images/'
                    
                } 
        });
