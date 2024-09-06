@@ -1,4 +1,4 @@
-define(['pipAPI', 'https://github.com/scarlettwwx/scarlettwwx.github.io/blob/master/studies/datapipe.biat.examples/qbiat6.js'], function(APIConstructor, iatExtension){
+define(['pipAPI', 'https://scarlettwwx.github.io/studies/datapipe.biat.examples/qbiat6.js'], function(APIConstructor, iatExtension){
  var API = new APIConstructor();
 
 	
