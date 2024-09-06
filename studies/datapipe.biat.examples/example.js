@@ -98,10 +98,9 @@ define(['pipAPI', 'https://scarlettwwx.github.io/studies/datapipe.biat.examples/
 				}
 			],
 			base_url : {//Where are your images at?
-			image : 'https://scarlettwwx.github.io/studies/datapipe.biat.examples/images/'
+			image : 'https://baranan.github.io/minno-tasks/images/'
 				
 			} 
 	});
 });
-
    
