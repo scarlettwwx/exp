@@ -1,4 +1,4 @@
-define(['pipAPI', 'https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/BIAT/qualtrics/qbiat6.js'], function(APIConstructor, iatExtension){
+define(['pipAPI', 'https://github.com/scarlettwwx/scarlettwwx.github.io/blob/master/studies/datapipe.biat.examples/qbiat6.js'], function(APIConstructor, iatExtension){
  var API = new APIConstructor();
 
 	
@@ -98,7 +98,7 @@ define(['pipAPI', 'https://cdn.jsdelivr.net/gh/baranan/minno-tasks@0.*/BIAT/qual
 				}
 			],
 			base_url : {//Where are your images at?
-			image : 'https://baranan.github.io/minno-tasks/images/'
+			image : 'https://scarlettwwx.github.io/studies/datapipe.biat.examples/images/'
 				
 			} 
 	});
