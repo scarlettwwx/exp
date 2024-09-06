@@ -40,7 +40,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor,Scorer, _) {
 				background: '#ffffff',
 				borderWidth: 5,
 				canvasBackground: '#ffffff',
-				borderColor: 'lightblue'
+				borderColor: 'black'
 			}, 
 			practiceCategory1 : 
 			{
@@ -205,10 +205,10 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor,Scorer, _) {
 			
 			//Whether to start with a practice block.
 			practiceBlock : true, 
-			nPracticeBlockTrials : 8, //Should be at least 8 trials.
+			nPracticeBlockTrials : 4, //Should be at least 8 trials.
 
-			//Number of blocks per focal category-attribute combination.
-			nCategoryAttributeBlocks : 4, 
+			//Number of blocks per focal category-attribute combination. 4 blocks is a good start.
+			nCategoryAttributeBlocks : 2, 
 
 			//Whether to switch the focal attribute only once in the task (after all the blocks with the first focal attribute), 
 			//Or after every exhaustion of all the category-attribute combinations (e.g., twice if nCategoryAttributeBlocks).
@@ -242,7 +242,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor,Scorer, _) {
 			//Text and style for key instructions displayed about the category labels.
 			leftKeyText : '"E" for all else', 
 			rightKeyText : '"I" if item belongs', 
-			keysCss : {'font-size':'0.8em', 'font-family':'courier', color:'#000000'},
+			keysCss : {'font-size':'0.8em', 'font-family':'arial', color:'#000000'},
 			rightKeyTextTouch : 'Left for all else', 
 			leftKeyTextTouch : 'Right if item belongs', 
 			//Text and style for the separator between the top and bottom category labels.
